@@ -72,6 +72,55 @@ def fig02_chi2_scan(scan, path, label="f(R) Hu-Sawicki"):
     _save(fig, path)
 
 
+def fig04_theory_map(rows_fixed, rows_free, path):
+    """chi^2 versus growth index gamma, for the whole theory family.
+
+    Left: sigma_8 fixed to Planck (amplitude is a prediction).
+    Right: one amplitude marginalised (only the shape is tested).
+    """
+    fig, axes = plt.subplots(1, 2, figsize=(13.2, 5.4), sharey=True)
+
+    pal = [C_RED, C_BLUE, "#1f8fff", C_GREEN, C_ORANGE, "#b8860b",
+           C_PURPLE, C_GREY]
+    for ax, rows, title in ((axes[0], rows_fixed, r"$\sigma_8$ fixed to Planck"),
+                            (axes[1], rows_free, r"one amplitude marginalised")):
+        for i, r in enumerate(rows):
+            col = pal[i % len(pal)]
+            ax.scatter(r["gamma"], r["chi2"], s=130, color=col, zorder=5,
+                       edgecolor="k", linewidth=0.6)
+            ax.annotate(r["name"], (r["gamma"], r["chi2"]),
+                        textcoords="offset points", xytext=(7, 5),
+                        fontsize=8, color=col)
+        ax.axhline(rows[0]["chi2"], color="k", lw=1.0, ls=":",
+                   label=r"$\Lambda$CDM")
+        ax.set_xlabel(r"growth index  $\gamma$")
+        ax.set_title(title)
+        ax.grid(alpha=0.25)
+    axes[0].set_ylabel(r"$\chi^2$ vs eBOSS DR16")
+    axes[0].legend(loc="upper right", fontsize=9)
+    fig.suptitle("The degeneracy map: which universes can the data separate?",
+                 y=1.02)
+    fig.tight_layout()
+    _save(fig, path)
+
+
+def fig05_family_fs8(z_grid, curves, path):
+    """f sigma_8(z) for the whole family, against the measurements.
+
+    curves : list of (label, y_array, color)
+    """
+    fig, ax = plt.subplots(figsize=(9.2, 5.6))
+    for label, yy, col in curves:
+        ax.plot(z_grid, yy, lw=2.2, color=col, label=label)
+    ax.set_xlabel(r"redshift  $z$")
+    ax.set_ylabel(r"$f\sigma_8(z)$")
+    ax.set_title("The whole family of universes: same background, different growth")
+    ax.legend(loc="upper right", fontsize=8.5, ncol=2)
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    _save(fig, path)
+
+
 def fig03_fs8_residuals(points, models, path):
     """Residuals of each model against the measurements."""
     z = np.array([p.z for p in points])

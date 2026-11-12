@@ -10,5 +10,5 @@ The physics core (background, growth, f(R) coupling) is shared with Verse I
 verbatim, so the two repositories cannot drift apart.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = ["constants", "background", "growth", "fr", "data", "fit"]

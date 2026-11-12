@@ -49,6 +49,47 @@ The 2σ bound is `|f_R0| < 3e-6`: **f(R) must be strongly screened** to survive
 the observed growth of structure. This is the first quantitative constraint
 this line of work produces.
 
+**3. The degeneracy map.** The family is extended with DGP (Vainshtein),
+f(T) (teleparallel) and Brans-Dicke, every coupling taken from the
+literature:
+
+| theory | γ | μ(a=1) | Δχ² (σ₈ fixed) | Δχ² (amp. free) |
+|---|---|---|---|---|
+| ΛCDM | 0.554 | 1.000 | — | — |
+| f(R) `1e-5` | 0.499 | 1.124 | +8.1 | +1.1 |
+| f(R) `1e-6` | 0.546 | 1.019 | +1.1 | +0.1 |
+| DGP self-acc | **0.668** | 0.727 | **−20.1** | −1.7 |
+| f(T) n=0.1 | 0.579 | 0.921 | −2.1 | −0.3 |
+| f(T) n=0.3 | 0.692 | 0.661 | −12.6 | −1.1 |
+| Brans-Dicke ω=100 | 0.552 | 1.005 | +0.5 | +0.03 |
+| Brans-Dicke ω=10 | 0.532 | 1.044 | +4.8 | +0.3 |
+
+Two things stand out.
+
+- **With `σ₈` fixed, the theories separate strongly.** DGP and f(T) *prefer*
+  the data over ΛCDM (negative Δχ²) because they weaken gravity (`μ < 1`),
+  which mimics the low `S₈` the data want. The growth index spans 38.7 %,
+  from f(R) `γ = 0.499` to f(T) `γ = 0.692`.
+- **Once the amplitude floats, the map collapses.** 14 of 28 pairs become
+  indistinguishable (`Δχ² < 1`); ΛCDM is degenerate with Brans-Dicke ω=100
+  at `Δχ² = 0.03`. The `fσ₈` *shape* alone cannot separate these theories —
+  the discrimination lives in the amplitude, i.e. in `S₈`, not in `γ`.
+
+That second point is the honest, important negative result: a family with a
+wide `γ` spread is still degenerate in `fσ₈(z)` once a single amplitude is
+marginalised. Breaking it needs a probe of the *shape* that is not `fσ₈`, or
+an independent amplitude.
+
+## Validation
+
+The numerical growth solver is validated against two textbook numbers:
+
+- ΛCDM: `γ = 0.554` vs analytic `6/11 = 0.545` (1.6 %);
+- DGP: `γ = 0.668` vs analytic `11/16 = 0.6875` (2.8 %).
+
+That DGP test is the decisive one: it exercises `μ(k,a) ≠ 1`, a
+scale-independent coupling, and a non-ΛCDM background all at once.
+
 ## What this is, and is not
 
 - The background is ΛCDM for every `|f_R0|` (designer background), so the
@@ -78,8 +119,10 @@ src/v2/
 ├── background.py    E(a) for every universe (shared with Verse I)
 ├── growth.py        the growth ODE and f sigma_8 (shared with Verse I)
 ├── fr.py            Hu-Sawicki chameleon coupling (shared with Verse I)
+├── mg.py            DGP, f(T), Brans-Dicke and the family registry
 ├── data.py          the published eBOSS DR16 compilation
 ├── fit.py           chi^2, the f(R) scan, marginalised amplitude
+├── degeneracy.py    the theory map and the degeneracy pairs
 └── plots.py         rendering only, no physics
 scripts/
 ├── build.py         recompute everything, seal with SHA-256

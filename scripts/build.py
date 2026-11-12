@@ -27,9 +27,11 @@ from v2 import __version__                     # noqa: E402
 from v2 import background as bg                # noqa: E402
 from v2 import constants as C                  # noqa: E402
 from v2 import data as dat                     # noqa: E402
+from v2 import degeneracy as dgn               # noqa: E402
 from v2 import fit as ft                       # noqa: E402
 from v2 import fr as frmod                     # noqa: E402
 from v2 import growth as gw                    # noqa: E402
+from v2 import mg                              # noqa: E402
 from v2 import plots as pl                     # noqa: E402
 
 RESULTS = ROOT / "results"
@@ -107,8 +109,26 @@ def build_chi2() -> dict:
     }
 
 
-def build_figures(data_res, growth_res, chi2_res) -> None:
-    print("[4/5] figures")
+def build_degeneracy() -> dict:
+    print("[4/7] the degeneracy map")
+    fixed = dgn.map_theories(free_amplitude=False)
+    free = dgn.map_theories(free_amplitude=True)
+    sep = dgn.separability()
+    return {"sigma8_fixed": fixed, "amplitude_free": free, "separability": sep}
+
+
+def build_family_curves() -> dict:
+    print("[3b/7] family growth curves")
+    z = list(Z_GRID)
+    out = {}
+    for th in mg.family():
+        rows = gw.f_sigma8(th.E, th.mu, K_REF, redshifts=tuple(z))
+        out[th.name] = [r["f_sigma8"] for r in rows]
+    return {"z": z, "k_h_mpc": K_REF, "curves": out}
+
+
+def build_figures(data_res, growth_res, chi2_res, fam_res, dg_res) -> None:
+    print("[5/7] figures")
     pts = dat.eboss_dr16()
     zz = list(Z_GRID)
 
@@ -125,12 +145,24 @@ def build_figures(data_res, growth_res, chi2_res) -> None:
     pl.fig02_chi2_scan(chi2_res["sigma8_fixed"],
                        FIGURES / "fig02_chi2_scan.png")
     pl.fig03_fs8_residuals(pts, models, FIGURES / "fig03_fs8_residuals.png")
+
+    # the family figure and the degeneracy map
+    pal = ["k", pl.C_BLUE, "#1f8fff", pl.C_GREEN, pl.C_ORANGE,
+           "#b8860b", pl.C_PURPLE, pl.C_GREY]
+    curves = []
+    for i, (name, yy) in enumerate(fam_res["curves"].items()):
+        curves.append((name, yy, pal[i % len(pal)]))
+    pl.fig05_family_fs8(zz, curves, FIGURES / "fig05_family_fs8.png")
+    pl.fig04_theory_map(dg_res["sigma8_fixed"]["rows"],
+                        dg_res["amplitude_free"]["rows"],
+                        FIGURES / "fig04_theory_map.png")
+
     for p in sorted(FIGURES.glob("*.png")):
         print(f"    {p.name}")
 
 
 def seal() -> dict:
-    print("[5/5] sealing artefacts")
+    print("[6/7] sealing artefacts")
     man = RESULTS / "MANIFEST.sha256"
     entries = []
     for p in sorted(list(RESULTS.glob("*.json")) + list(FIGURES.glob("*.png"))):
@@ -153,10 +185,13 @@ def main() -> int:
     _dump("data.json", d)
     g = build_growth_curves()
     _dump("growth_curves.json", g)
+    fam = build_family_curves()
+    _dump("family_curves.json", fam)
     c = build_chi2()
     _dump("chi2.json", c)
-    build_figures(d, g, c)
-    manifest = seal()
+    dg = build_degeneracy()
+    _dump("degeneracy.json", dg)
+    build_figures(d, g, c, fam, dg)
 
     summary = {
         "verse_ii_version": __version__,
@@ -166,15 +201,24 @@ def main() -> int:
         "lcdm_chi2_amplitude_free": c["amplitude_free"]["lcdm"]["chi2"],
         "best_fit_amplitude": c["amplitude_free"]["lcdm"]["amplitude"],
         "bound_2sigma_f_R0": c["bound_2sigma_f_R0"],
-        "n_artefacts": manifest["n_artefacts"],
+        "gamma_spread_rel": dg["separability"]["gamma_spread_rel"],
+        "n_degenerate_pairs_fixed": len(dg["sigma8_fixed"]["degenerate_pairs"]),
+        "n_degenerate_pairs_free": len(dg["amplitude_free"]["degenerate_pairs"]),
+        "n_theories": len(dg["sigma8_fixed"]["rows"]),
     }
     _dump("build.json", summary)
+    manifest = seal()
+    summary["n_artefacts"] = manifest["n_artefacts"]
 
     print()
     print(f"Lambda-CDM chi^2 (sigma8 fixed) : {summary['lcdm_chi2_sigma8_fixed']:.2f}")
     print(f"Lambda-CDM chi^2 (amp. free)    : {summary['lcdm_chi2_amplitude_free']:.2f} "
           f"(best-fit amp = {summary['best_fit_amplitude']:.3f})")
     print(f"2-sigma bound on |f_R0|         : {summary['bound_2sigma_f_R0']}")
+    print(f"theories compared               : {summary['n_theories']}")
+    print(f"gamma spread                    : {100*summary['gamma_spread_rel']:.1f}%")
+    print(f"degenerate pairs (fixed / free) : "
+          f"{summary['n_degenerate_pairs_fixed']} / {summary['n_degenerate_pairs_free']}")
     print()
     print(f"build complete in {time.time() - t0:.2f} s")
     print(f"{manifest['n_artefacts']} artefacts sealed")

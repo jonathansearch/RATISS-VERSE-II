@@ -1,0 +1,322 @@
+{
+  "sigma8_fixed": {
+    "k_h_mpc": 0.1,
+    "free_amplitude": false,
+    "rows": [
+      {
+        "name": "Lambda-CDM",
+        "gamma": 0.5543609664573533,
+        "gamma_analytic": 0.5454545454545454,
+        "f_z0": 0.5273660111171637,
+        "mu_today": 1.0,
+        "scale_dependent": false,
+        "chi2": 26.796339861179074,
+        "chi2_per_dof": 4.466056643529845,
+        "amplitude": 1.0,
+        "source": "GR; Peebles 1980",
+        "delta_chi2_vs_lcdm": 0.0
+      },
+      {
+        "name": "f(R) |fR0|=1e-5",
+        "gamma": 0.4992605016939053,
+        "gamma_analytic": null,
+        "f_z0": 0.5619952930053302,
+        "mu_today": 1.1234992250016307,
+        "scale_dependent": true,
+        "chi2": 34.875485704080425,
+        "chi2_per_dof": 5.812580950680071,
+        "amplitude": 1.0,
+        "source": "Hu & Sawicki 2007, PRD 76, 064004",
+        "delta_chi2_vs_lcdm": 8.079145842901351
+      },
+      {
+        "name": "f(R) |fR0|=1e-6",
+        "gamma": 0.5456943030273506,
+        "gamma_analytic": null,
+        "f_z0": 0.5326679009479365,
+        "mu_today": 1.0185280680072948,
+        "scale_dependent": true,
+        "chi2": 27.847522527515647,
+        "chi2_per_dof": 4.641253754585941,
+        "amplitude": 1.0,
+        "source": "Hu & Sawicki 2007, PRD 76, 064004",
+        "delta_chi2_vs_lcdm": 1.0511826663365724
+      },
+      {
+        "name": "DGP self-acc",
+        "gamma": 0.6681469983619722,
+        "gamma_analytic": 0.6875,
+        "f_z0": 0.4624167499938973,
+        "mu_today": 0.7269511580441986,
+        "scale_dependent": false,
+        "chi2": 6.682291496047291,
+        "chi2_per_dof": 1.113715249341215,
+        "amplitude": 1.0,
+        "source": "Lue et al 2004, PRD 69, 124015",
+        "delta_chi2_vs_lcdm": -20.114048365131783
+      },
+      {
+        "name": "f(T) n=0.1",
+        "gamma": 0.5792127220407403,
+        "gamma_analytic": null,
+        "f_z0": 0.5124535978699204,
+        "mu_today": 0.9211602012735041,
+        "scale_dependent": false,
+        "chi2": 24.673458058389258,
+        "chi2_per_dof": 4.112243009731543,
+        "amplitude": 1.0,
+        "source": "Wu & Yu 2011, arXiv:1010.3512",
+        "delta_chi2_vs_lcdm": -2.1228818027898164
+      },
+      {
+        "name": "f(T) n=0.3",
+        "gamma": 0.6924110799043218,
+        "gamma_analytic": null,
+        "f_z0": 0.44968761145383856,
+        "mu_today": 0.660709271402851,
+        "scale_dependent": false,
+        "chi2": 14.17000823762084,
+        "chi2_per_dof": 2.3616680396034733,
+        "amplitude": 1.0,
+        "source": "Wu & Yu 2011, arXiv:1010.3512",
+        "delta_chi2_vs_lcdm": -12.626331623558235
+      },
+      {
+        "name": "Brans-Dicke w=100",
+        "gamma": 0.5517530455024191,
+        "gamma_analytic": null,
+        "f_z0": 0.5289558495597729,
+        "mu_today": 1.0049261083743843,
+        "scale_dependent": false,
+        "chi2": 27.322477663870895,
+        "chi2_per_dof": 4.553746277311816,
+        "amplitude": 1.0,
+        "source": "Brans & Dicke 1961",
+        "delta_chi2_vs_lcdm": 0.5261378026918209
+      },
+      {
+        "name": "Brans-Dicke w=10",
+        "gamma": 0.5318063286323713,
+        "gamma_analytic": null,
+        "f_z0": 0.5412753322254786,
+        "mu_today": 1.0434782608695652,
+        "scale_dependent": false,
+        "chi2": 31.563161342318292,
+        "chi2_per_dof": 5.260526890386382,
+        "amplitude": 1.0,
+        "source": "Brans & Dicke 1961",
+        "delta_chi2_vs_lcdm": 4.7668214811392176
+      }
+    ],
+    "degenerate_pairs": [
+      {
+        "a": "Lambda-CDM",
+        "b": "Brans-Dicke w=100",
+        "delta_chi2": 0.5261378026918209
+      },
+      {
+        "a": "f(R) |fR0|=1e-6",
+        "b": "Brans-Dicke w=100",
+        "delta_chi2": 0.5250448636447516
+      }
+    ]
+  },
+  "amplitude_free": {
+    "k_h_mpc": 0.1,
+    "free_amplitude": true,
+    "rows": [
+      {
+        "name": "Lambda-CDM",
+        "gamma": 0.5543609664573533,
+        "gamma_analytic": 0.5454545454545454,
+        "f_z0": 0.5273660111171637,
+        "mu_today": 1.0,
+        "scale_dependent": false,
+        "chi2": 5.843521083443227,
+        "chi2_per_dof": 1.1687042166886454,
+        "amplitude": 0.8331581880304827,
+        "source": "GR; Peebles 1980",
+        "delta_chi2_vs_lcdm": 0.0
+      },
+      {
+        "name": "f(R) |fR0|=1e-5",
+        "gamma": 0.4992605016939053,
+        "gamma_analytic": null,
+        "f_z0": 0.5619952930053302,
+        "mu_today": 1.1234992250016307,
+        "scale_dependent": true,
+        "chi2": 6.948533108129176,
+        "chi2_per_dof": 1.3897066216258351,
+        "amplitude": 0.8120611973519902,
+        "source": "Hu & Sawicki 2007, PRD 76, 064004",
+        "delta_chi2_vs_lcdm": 1.1050120246859487
+      },
+      {
+        "name": "f(R) |fR0|=1e-6",
+        "gamma": 0.5456943030273506,
+        "gamma_analytic": null,
+        "f_z0": 0.5326679009479365,
+        "mu_today": 1.0185280680072948,
+        "scale_dependent": true,
+        "chi2": 5.987406520757271,
+        "chi2_per_dof": 1.1974813041514543,
+        "amplitude": 0.8301716669514058,
+        "source": "Hu & Sawicki 2007, PRD 76, 064004",
+        "delta_chi2_vs_lcdm": 0.14388543731404368
+      },
+      {
+        "name": "DGP self-acc",
+        "gamma": 0.6681469983619722,
+        "gamma_analytic": 0.6875,
+        "f_z0": 0.4624167499938973,
+        "mu_today": 0.7269511580441986,
+        "scale_dependent": false,
+        "chi2": 4.165063201116966,
+        "chi2_per_dof": 0.8330126402233932,
+        "amplitude": 0.935192944224784,
+        "source": "Lue et al 2004, PRD 69, 124015",
+        "delta_chi2_vs_lcdm": -1.6784578823262617
+      },
+      {
+        "name": "f(T) n=0.1",
+        "gamma": 0.5792127220407403,
+        "gamma_analytic": null,
+        "f_z0": 0.5124535978699204,
+        "mu_today": 0.9211602012735041,
+        "scale_dependent": false,
+        "chi2": 5.597595839148122,
+        "chi2_per_dof": 1.1195191678296244,
+        "amplitude": 0.8396111082667265,
+        "source": "Wu & Yu 2011, arXiv:1010.3512",
+        "delta_chi2_vs_lcdm": -0.24592524429510565
+      },
+      {
+        "name": "f(T) n=0.3",
+        "gamma": 0.6924110799043218,
+        "gamma_analytic": null,
+        "f_z0": 0.44968761145383856,
+        "mu_today": 0.660709271402851,
+        "scale_dependent": false,
+        "chi2": 4.745465144034679,
+        "chi2_per_dof": 0.9490930288069357,
+        "amplitude": 0.8817080245751865,
+        "source": "Wu & Yu 2011, arXiv:1010.3512",
+        "delta_chi2_vs_lcdm": -1.0980559394085487
+      },
+      {
+        "name": "Brans-Dicke w=100",
+        "gamma": 0.5517530455024191,
+        "gamma_analytic": null,
+        "f_z0": 0.5289558495597729,
+        "mu_today": 1.0049261083743843,
+        "scale_dependent": false,
+        "chi2": 5.870859501311394,
+        "chi2_per_dof": 1.1741719002622788,
+        "amplitude": 0.8315129227584231,
+        "source": "Brans & Dicke 1961",
+        "delta_chi2_vs_lcdm": 0.027338417868166154
+      },
+      {
+        "name": "Brans-Dicke w=10",
+        "gamma": 0.5318063286323713,
+        "gamma_analytic": null,
+        "f_z0": 0.5412753322254786,
+        "mu_today": 1.0434782608695652,
+        "scale_dependent": false,
+        "chi2": 6.089628232729293,
+        "chi2_per_dof": 1.2179256465458586,
+        "amplitude": 0.8190995024954132,
+        "source": "Brans & Dicke 1961",
+        "delta_chi2_vs_lcdm": 0.24610714928606559
+      }
+    ],
+    "degenerate_pairs": [
+      {
+        "a": "Lambda-CDM",
+        "b": "f(R) |fR0|=1e-6",
+        "delta_chi2": 0.14388543731404368
+      },
+      {
+        "a": "Lambda-CDM",
+        "b": "f(T) n=0.1",
+        "delta_chi2": 0.24592524429510565
+      },
+      {
+        "a": "Lambda-CDM",
+        "b": "Brans-Dicke w=100",
+        "delta_chi2": 0.027338417868166154
+      },
+      {
+        "a": "Lambda-CDM",
+        "b": "Brans-Dicke w=10",
+        "delta_chi2": 0.24610714928606559
+      },
+      {
+        "a": "f(R) |fR0|=1e-5",
+        "b": "f(R) |fR0|=1e-6",
+        "delta_chi2": 0.961126587371905
+      },
+      {
+        "a": "f(R) |fR0|=1e-5",
+        "b": "Brans-Dicke w=10",
+        "delta_chi2": 0.8589048753998831
+      },
+      {
+        "a": "f(R) |fR0|=1e-6",
+        "b": "f(T) n=0.1",
+        "delta_chi2": 0.38981068160914933
+      },
+      {
+        "a": "f(R) |fR0|=1e-6",
+        "b": "Brans-Dicke w=100",
+        "delta_chi2": 0.11654701944587753
+      },
+      {
+        "a": "f(R) |fR0|=1e-6",
+        "b": "Brans-Dicke w=10",
+        "delta_chi2": 0.1022217119720219
+      },
+      {
+        "a": "DGP self-acc",
+        "b": "f(T) n=0.3",
+        "delta_chi2": 0.580401942917713
+      },
+      {
+        "a": "f(T) n=0.1",
+        "b": "f(T) n=0.3",
+        "delta_chi2": 0.8521306951134431
+      },
+      {
+        "a": "f(T) n=0.1",
+        "b": "Brans-Dicke w=100",
+        "delta_chi2": 0.2732636621632718
+      },
+      {
+        "a": "f(T) n=0.1",
+        "b": "Brans-Dicke w=10",
+        "delta_chi2": 0.49203239358117123
+      },
+      {
+        "a": "Brans-Dicke w=100",
+        "b": "Brans-Dicke w=10",
+        "delta_chi2": 0.21876873141789943
+      }
+    ]
+  },
+  "separability": {
+    "gamma": {
+      "Lambda-CDM": 0.5543609664573533,
+      "f(R) |fR0|=1e-5": 0.4992605016939053,
+      "f(R) |fR0|=1e-6": 0.5456943030273506,
+      "DGP self-acc": 0.6681469983619722,
+      "f(T) n=0.1": 0.5792127220407403,
+      "f(T) n=0.3": 0.6924110799043218,
+      "Brans-Dicke w=100": 0.5517530455024191,
+      "Brans-Dicke w=10": 0.5318063286323713
+    },
+    "gamma_min": 0.4992605016939053,
+    "gamma_max": 0.6924110799043218,
+    "gamma_spread_abs": 0.19315057821041653,
+    "gamma_spread_rel": 0.38687334078119484
+  }
+}
