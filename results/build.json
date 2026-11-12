@@ -1,0 +1,10 @@
+{
+  "verse_ii_version": "0.1.0",
+  "python": "3.13.15",
+  "numpy": "2.5.4",
+  "lcdm_chi2_sigma8_fixed": 26.796339861179074,
+  "lcdm_chi2_amplitude_free": 5.843521083443227,
+  "best_fit_amplitude": 0.8331581880304827,
+  "bound_2sigma_f_R0": 3e-06,
+  "n_artefacts": 6
+}

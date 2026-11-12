@@ -1,0 +1,49 @@
+{
+  "dataset": "eBOSS DR16 RSD-only f sigma_8 (Table 3)",
+  "reference": "eBOSS Collaboration 2021, PRD 103, 083533, arXiv:2007.08991",
+  "n_points": 6,
+  "points": [
+    {
+      "tracer": "MGS",
+      "z": 0.15,
+      "f_sigma8": 0.53,
+      "sigma": 0.16,
+      "ref": "eBOSS DR16 (2021), PRD 103, 083533, arXiv:2007.08991"
+    },
+    {
+      "tracer": "BOSS gal",
+      "z": 0.38,
+      "f_sigma8": 0.497,
+      "sigma": 0.045,
+      "ref": "eBOSS DR16 (2021), PRD 103, 083533, arXiv:2007.08991"
+    },
+    {
+      "tracer": "BOSS gal",
+      "z": 0.51,
+      "f_sigma8": 0.459,
+      "sigma": 0.038,
+      "ref": "eBOSS DR16 (2021), PRD 103, 083533, arXiv:2007.08991"
+    },
+    {
+      "tracer": "eBOSS LRG",
+      "z": 0.7,
+      "f_sigma8": 0.473,
+      "sigma": 0.041,
+      "ref": "eBOSS DR16 (2021), PRD 103, 083533, arXiv:2007.08991"
+    },
+    {
+      "tracer": "eBOSS ELG",
+      "z": 0.85,
+      "f_sigma8": 0.315,
+      "sigma": 0.095,
+      "ref": "eBOSS DR16 (2021), PRD 103, 083533, arXiv:2007.08991"
+    },
+    {
+      "tracer": "eBOSS QSO",
+      "z": 1.48,
+      "f_sigma8": 0.462,
+      "sigma": 0.045,
+      "ref": "eBOSS DR16 (2021), PRD 103, 083533, arXiv:2007.08991"
+    }
+  ]
+}
