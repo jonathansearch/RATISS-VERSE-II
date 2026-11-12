@@ -121,6 +121,66 @@ def fig05_family_fs8(z_grid, curves, path):
     _save(fig, path)
 
 
+def fig06_gamma_z(z_list, curves, path):
+    """gamma(z) for the whole family: the strongest discriminator.
+
+    curves : list of (label, y_array, color)
+    """
+    fig, ax = plt.subplots(figsize=(9.2, 5.4))
+    for label, yy, col in curves:
+        ax.plot(z_list, yy, lw=2.3, color=col, label=label)
+    ax.set_xlabel(r"redshift  $z$")
+    ax.set_ylabel(r"growth index  $\gamma(z)=\ln f/\ln\Omega_m$")
+    ax.set_title(r"The time shape of $\gamma$: a discriminator the single-scale fit cannot use")
+    ax.legend(loc="best", fontsize=8.5, ncol=2)
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    _save(fig, path)
+
+
+def fig07_discriminator(vectors, path):
+    """Each theory as a point in the (gamma(0), dgamma/dz) plane, coloured by
+    whether it has a scale-dependent coupling."""
+    fig, ax = plt.subplots(figsize=(9.0, 6.0))
+    pal = [C_RED, C_BLUE, "#1f8fff", C_GREEN, C_ORANGE, "#b8860b",
+           C_PURPLE, C_GREY]
+    for i, v in enumerate(vectors):
+        col = pal[i % len(pal)]
+        ax.scatter(v["gamma_0"], v["gamma_slope"], s=150, color=col,
+                   zorder=5, edgecolor="k", linewidth=0.6)
+        ax.annotate(v["name"], (v["gamma_0"], v["gamma_slope"]),
+                    textcoords="offset points", xytext=(8, 5),
+                    fontsize=8.5, color=col)
+    ax.axhline(0, color="k", lw=1.0, ls=":")
+    ax.set_xlabel(r"$\gamma(0)$")
+    ax.set_ylabel(r"$d\gamma/dz$")
+    ax.set_title(r"Discriminator plane: $\gamma(0)$ alone is degenerate, the slope is not")
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    _save(fig, path)
+
+
+def fig08_environment(fr0_values, env_rows, path):
+    """The chameleon screening factor per environment and |f_R0|."""
+    fig, ax = plt.subplots(figsize=(9.0, 5.4))
+    envs = ["void", "group", "galaxy", "cluster"]
+    pal = {1e-6: C_GREEN, 1e-5: C_BLUE, 1e-4: C_RED}
+    import numpy as np
+    for fR0 in fr0_values:
+        ys = [next(r["screening_factor"] for r in env_rows
+                   if r["f_R0"] == fR0 and r["environment"] == e) for e in envs]
+        ax.plot(range(len(envs)), ys, "o-", lw=2.3, ms=8,
+                color=pal.get(fR0, "k"), label=rf"$|f_{{R0}}|={fR0:.0e}$")
+    ax.set_xticks(range(len(envs)))
+    ax.set_xticklabels(envs)
+    ax.set_ylabel(r"screening factor  $S$  (1 = unscreened)")
+    ax.set_title("Chameleon screening: voids see the fifth force, clusters do not")
+    ax.legend(fontsize=9)
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    _save(fig, path)
+
+
 def fig03_fs8_residuals(points, models, path):
     """Residuals of each model against the measurements."""
     z = np.array([p.z for p in points])

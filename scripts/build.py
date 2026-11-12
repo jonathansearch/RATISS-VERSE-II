@@ -33,6 +33,7 @@ from v2 import fr as frmod                     # noqa: E402
 from v2 import growth as gw                    # noqa: E402
 from v2 import mg                              # noqa: E402
 from v2 import plots as pl                     # noqa: E402
+from v2 import signatures as sgn               # noqa: E402
 
 RESULTS = ROOT / "results"
 FIGURES = ROOT / "figures"
@@ -127,8 +128,23 @@ def build_family_curves() -> dict:
     return {"z": z, "k_h_mpc": K_REF, "curves": out}
 
 
-def build_figures(data_res, growth_res, chi2_res, fam_res, dg_res) -> None:
-    print("[5/7] figures")
+def build_signatures() -> dict:
+    print("[4b/8] fine signatures")
+    z_list = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2]
+    curves = {th.name: sgn.gamma_curve(th, z_list) for th in mg.family()}
+    disc = sgn.discriminability()
+    env = sgn.environment_table()
+    return {
+        "z_list": z_list,
+        "gamma_z_curves": curves,
+        "discriminability": disc,
+        "environment": env,
+    }
+
+
+def build_figures(data_res, growth_res, chi2_res, fam_res, dg_res,
+                  sig_res) -> None:
+    print("[5/8] figures")
     pts = dat.eboss_dr16()
     zz = list(Z_GRID)
 
@@ -157,12 +173,24 @@ def build_figures(data_res, growth_res, chi2_res, fam_res, dg_res) -> None:
                         dg_res["amplitude_free"]["rows"],
                         FIGURES / "fig04_theory_map.png")
 
+    # step 3: fine signatures
+    zl = sig_res["z_list"]
+    gcurves = []
+    for i, (name, yy) in enumerate(sig_res["gamma_z_curves"].items()):
+        gcurves.append((name, yy, pal[i % len(pal)]))
+    pl.fig06_gamma_z(zl, gcurves, FIGURES / "fig06_gamma_z.png")
+    pl.fig07_discriminator(sig_res["discriminability"]["vectors"],
+                           FIGURES / "fig07_discriminator.png")
+    pl.fig08_environment([1e-6, 1e-5, 1e-4],
+                         sig_res["environment"]["rows"],
+                         FIGURES / "fig08_environment.png")
+
     for p in sorted(FIGURES.glob("*.png")):
         print(f"    {p.name}")
 
 
 def seal() -> dict:
-    print("[6/7] sealing artefacts")
+    print("[6/8] sealing artefacts")
     man = RESULTS / "MANIFEST.sha256"
     entries = []
     for p in sorted(list(RESULTS.glob("*.json")) + list(FIGURES.glob("*.png"))):
@@ -191,7 +219,9 @@ def main() -> int:
     _dump("chi2.json", c)
     dg = build_degeneracy()
     _dump("degeneracy.json", dg)
-    build_figures(d, g, c, fam, dg)
+    sig = build_signatures()
+    _dump("signatures.json", sig)
+    build_figures(d, g, c, fam, dg, sig)
 
     summary = {
         "verse_ii_version": __version__,
@@ -205,6 +235,7 @@ def main() -> int:
         "n_degenerate_pairs_fixed": len(dg["sigma8_fixed"]["degenerate_pairs"]),
         "n_degenerate_pairs_free": len(dg["amplitude_free"]["degenerate_pairs"]),
         "n_theories": len(dg["sigma8_fixed"]["rows"]),
+        "best_signature": max(sig["discriminability"]["signature_power"], key=lambda k: sig["discriminability"]["signature_power"][k]["spread_rel"]),
     }
     _dump("build.json", summary)
     manifest = seal()

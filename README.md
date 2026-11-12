@@ -80,6 +80,33 @@ wide `γ` spread is still degenerate in `fσ₈(z)` once a single amplitude is
 marginalised. Breaking it needs a probe of the *shape* that is not `fσ₈`, or
 an independent amplitude.
 
+**4. Fine signatures — breaking the degeneracy.** Three observables that are
+*not* a single-amplitude `fσ₈` are computed and ranked by how much they spread
+the family:
+
+| signature | spread across the family | verdict |
+|---|---|---|
+| `γ(0)` | 0.19 (33 %) | weak |
+| `dγ/dz` | 0.45 (**2730 %**) | **the discriminator** |
+| `k`-variation of `fσ₈` | 0.093 | f(R)-only |
+| void−cluster split | 0.031 | f(R)-only |
+
+- **The time shape of `γ` is the strongest discriminator.** f(R) has
+  `dγ/dz = −0.20` while DGP has `+0.076`: opposite signs. ΛCDM and
+  Brans-Dicke ω=100, indistinguishable in `χ²` (v0.2.0), differ in slope by
+  `−0.033` vs `−0.042`.
+- **Only f(R) is scale-dependent.** Its `fσ₈` varies by 9.3 % between
+  `k = 0.02` and `0.4 h/Mpc`; DGP, f(T) and Brans-Dicke vary by 0 %. Measuring
+  growth at two wavenumbers therefore removes them at once.
+- **Only f(R) is environment-dependent.** The chameleon screening factor runs
+  from `S = 1.0` in a void to `S = 0.06` in a cluster for `|f_R0| = 1e-5`,
+  giving a void−cluster growth split of 3.1 %.
+
+So the picture closes: the *amplitude* separates theories that differ in
+`μ(a)`, the *time shape of `γ`* separates those that agree at `z = 0`, and the
+*scale and environment dependence* are unique to the chameleon. Each
+signature kills a different degeneracy.
+
 ## Validation
 
 The numerical growth solver is validated against two textbook numbers:
@@ -123,6 +150,7 @@ src/v2/
 ├── data.py          the published eBOSS DR16 compilation
 ├── fit.py           chi^2, the f(R) scan, marginalised amplitude
 ├── degeneracy.py    the theory map and the degeneracy pairs
+├── signatures.py    gamma(z), scale dependence, environment screening
 └── plots.py         rendering only, no physics
 scripts/
 ├── build.py         recompute everything, seal with SHA-256
